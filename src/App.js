@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Routes } from './routes'
+
+import SingIn from './Pages/SingIn/SingIn'
+import SingUp from './Pages/SingUp/SingUp'
+
+import './App.scss'
+
+const App = () => {
+    return (
+        <Suspense fallback={
+            'preloader'
+        }>
+            <Router>
+                <div className="app">
+                    <Switch>
+                        <Route exact path={Routes.auth.singIn}>
+                            <SingIn/>
+                        </Route>
+                        <Route exact path={Routes.auth.singUp}>
+                            <SingUp/>
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
+        </Suspense>
+    )
 }
 
-export default App;
+export default App
